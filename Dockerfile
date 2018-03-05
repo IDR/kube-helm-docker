@@ -1,3 +1,12 @@
+FROM library/golang:1.10.0 as builder
+
+RUN git clone https://github.com/roboll/helmfile.git /go/src/github.com/roboll/helmfile && \
+    cd /go/src/github.com/roboll/helmfile && \
+    git reset --hard 8f607b0da7e042fa503617aac1da3d2598199b17
+RUN cd /go/src/github.com/roboll/helmfile && \
+    go build
+
+######################################################################
 FROM library/alpine:3.6
 MAINTAINER spli@dundee.ac.uk
 
@@ -10,8 +19,13 @@ RUN curl -sL https://storage.googleapis.com/kubernetes-release/release/v${KUBE_V
     curl -sL https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar -zxvf - linux-amd64/helm && \
     mv linux-amd64/helm /usr/local/bin/helm && \
     rmdir linux-amd64 && \
-    chmod +x /usr/local/bin/kubectl /usr/local/bin/helm
+    chmod +x /usr/local/bin/*
+
+COPY --from=builder /go/src/github.com/roboll/helmfile/helmfile /usr/local/bin/
 
 RUN adduser -D kube
 USER kube
 RUN helm init --client-only
+
+RUN curl -L https://github.com/databus23/helm-diff/releases/download/v2.7.0%2B1/helm-diff-linux.tgz | \
+    tar -C /home/kube/.helm/plugins -xzv
