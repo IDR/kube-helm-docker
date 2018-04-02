@@ -1,0 +1,9 @@
+language: python
+services:
+  - docker
+addons:
+script:
+  - docker build -t kubectl-helm .
+  - docker run -it --rm kubectl-helm kubectl version --client
+  - docker run -it --rm kubectl-helm helm version --client
+  - docker run -it --rm kubectl-helm helmfile --version
