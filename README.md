@@ -1,3 +1,5 @@
 # Kubectl and Helm clients
 
-docker run -it --rm -v ~/.kube/config:/home/kube/.kube/config:ro kube-helm-docker
+This includes helmfile.
+
+    docker run -it --rm -v ~/.kube/:/home/kube/.kube/:ro kube-helm-docker
