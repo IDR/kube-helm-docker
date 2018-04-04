@@ -13,7 +13,8 @@ MAINTAINER spli@dundee.ac.uk
 RUN apk add --update curl && \
     rm /var/cache/apk/*
 
-ARG KUBE_VERSION=1.9.3
+# kubectl has good backwards compatibility, helm doesn't
+ARG KUBE_VERSION=1.10.0
 ARG HELM_VERSION=2.7.2
 RUN curl -sL https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     curl -sL https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar -zxvf - linux-amd64/helm && \
