@@ -27,6 +27,7 @@ COPY --from=builder /go/src/github.com/roboll/helmfile/helmfile /usr/local/bin/
 
 RUN adduser -D kube
 USER kube
+WORKDIR /home/kube
 RUN helm init --client-only
 
 RUN curl -sSL https://github.com/databus23/helm-diff/releases/download/v${HELMDIFF_VERSION}/helm-diff-linux.tgz | \
