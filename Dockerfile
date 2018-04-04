@@ -1,8 +1,9 @@
 FROM library/golang:1.10.0 as builder
 
-RUN git clone https://github.com/roboll/helmfile.git /go/src/github.com/roboll/helmfile && \
-    cd /go/src/github.com/roboll/helmfile && \
-    git reset --hard 8f607b0da7e042fa503617aac1da3d2598199b17
+#RUN git clone https://github.com/roboll/helmfile.git /go/src/github.com/roboll/helmfile && \
+#    cd /go/src/github.com/roboll/helmfile && \
+#    git reset --hard 283848c594aaed03512f3badaf4f66e8d49c4532
+RUN git clone --branch v0.11-idr1 --depth 1 https://github.com/manics/helmfile.git /go/src/github.com/roboll/helmfile
 RUN cd /go/src/github.com/roboll/helmfile && \
     go build
 
