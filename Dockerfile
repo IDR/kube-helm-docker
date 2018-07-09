@@ -1,5 +1,6 @@
-FROM library/golang:1.10.0 as builder
+FROM library/golang:1.10.3-alpine3.7 as builder
 
+RUN apk add --no-cache git
 #RUN git clone https://github.com/roboll/helmfile.git /go/src/github.com/roboll/helmfile && \
 #    cd /go/src/github.com/roboll/helmfile && \
 #    git reset --hard 283848c594aaed03512f3badaf4f66e8d49c4532
@@ -9,11 +10,10 @@ RUN cd /go/src/github.com/roboll/helmfile && \
     go build
 
 ######################################################################
-FROM library/alpine:3.6
+FROM library/alpine:3.7
 MAINTAINER spli@dundee.ac.uk
 
-RUN apk add --update curl && \
-    rm /var/cache/apk/*
+RUN apk add --no-cache curl
 
 # kubectl has good backwards compatibility, helm doesn't
 ARG KUBE_VERSION=1.10.4
