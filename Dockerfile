@@ -3,7 +3,8 @@ FROM library/golang:1.10.0 as builder
 #RUN git clone https://github.com/roboll/helmfile.git /go/src/github.com/roboll/helmfile && \
 #    cd /go/src/github.com/roboll/helmfile && \
 #    git reset --hard 283848c594aaed03512f3badaf4f66e8d49c4532
-RUN git clone --branch v0.11-idr1 --depth 1 https://github.com/manics/helmfile.git /go/src/github.com/roboll/helmfile
+RUN git clone --branch zap-logger --depth 1 https://github.com/manics/helmfile.git /go/src/github.com/roboll/helmfile
+# Commit e1405f9c2cba5e544ea05100bb6554c63e911d08
 RUN cd /go/src/github.com/roboll/helmfile && \
     go build
 
