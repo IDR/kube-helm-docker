@@ -1,5 +1,5 @@
 FROM library/alpine:3.7
-MAINTAINER spli@dundee.ac.uk
+MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 RUN apk add --no-cache curl
 
