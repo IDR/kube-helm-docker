@@ -4,10 +4,10 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 RUN apk add --no-cache curl
 
 # kubectl has good backwards compatibility, helm doesn't
-ARG KUBE_VERSION=1.10.4
+ARG KUBE_VERSION=1.10.7
 ARG HELM_VERSION=2.9.1
-ARG HELMFILE_VERSION=0.21.0
-ARG HELMDIFF_VERSION=2.9.0+2
+ARG HELMFILE_VERSION=0.37.0
+ARG HELMDIFF_VERSION=2.9.0+3
 RUN curl -sL https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     curl -sL https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar -zxvf - linux-amd64/helm && \
     mv linux-amd64/helm /usr/local/bin/helm && \
