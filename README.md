@@ -17,3 +17,26 @@ You will need to rebuild the image for other Helm versions.
 
 Helmfile is a wrapper around Helm.
 The latest version should be compatible with older versions of Helm.
+
+
+## Helmfile example
+
+Initialise or update the list of available external charts, you should always run this first:
+
+    helmfile repos
+
+See differences between your deployed charts and your helmfile:
+
+    helmfile diff
+
+Synchronise deployed charts with helmfile:
+
+    helmfile sync
+
+Pass additional arguments when synchronising, for instance when a chart update requires `--force`:
+
+    helmfile sync --args --force
+
+Synchronise a subset of releases in the helmfile:
+
+    helmfile --selector name=jupyter-int sync
